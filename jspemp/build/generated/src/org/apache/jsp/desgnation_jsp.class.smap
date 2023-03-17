@@ -1,0 +1,28 @@
+SMAP
+desgnation_jsp.java
+JSP
+*S JSP
+*F
++ 0 header.jsp
+header.jsp
++ 1 desgnation.jsp
+desgnation.jsp
++ 2 footer.jsp
+footer.jsp
+*L
+1,40:51
+41,4:92
+44,39:96
+1#1,28:134
+28,11:162
+38,3:173
+41,2:177
+42,11:179
+53,4:191
+56,2:195
+58,2:197,3
+60,2:203
+62,2:206
+63,6:208
+1#2,28:213
+*E
