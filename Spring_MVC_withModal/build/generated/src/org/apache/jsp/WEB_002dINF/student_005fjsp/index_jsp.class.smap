@@ -1,0 +1,15 @@
+SMAP
+index_jsp.java
+JSP
+*S JSP
+*F
++ 0 index.jsp
+WEB-INF/student_jsp/index.jsp
+*L
+5,23:54
+27:102,11
+28:113
+29,5:114,3
+34,2:129
+35,6:79
+*E
