@@ -28,8 +28,10 @@ public class ExamPortalService {
 		
 		List<Topics>lsttopic = new ArrayList<Topics>();
 		for(Topics t : topicrepo.findAll()) {
-			Topics tp = new Topics(t.getTopic_id(), t.getTopic_name(), 0,null);
-			lsttopic.add(tp);
+			if(t.getFlag_top() == 0) {
+				Topics tp = new Topics(t.getTopic_id(), t.getTopic_name(), 0,null);
+				lsttopic.add(tp);
+			}
 		}
 		return lsttopic;
 	}
@@ -44,7 +46,22 @@ public class ExamPortalService {
 		return tp;
 	}
 	
+	public Topics UpdateTopic(Topics t) {
+		Topics tp=topicrepo.save(t);
+		return tp;
+	}
 	
+//	public Topics DeleteTopic(int id) {
+//		Topics t=GetTopicsbyId(id);
+//		topicrepo.delete(t);
+//		return t;
+//	}
+	
+	public Topics DeleteTopic(int id) {
+		Topics t=topicrepo.findById(id).get();
+		Topics tp = new Topics(t.getTopic_id(), t.getTopic_name(),1, null);
+		return topicrepo.save(tp);
+	}
 	
 	
 
@@ -52,9 +69,11 @@ public class ExamPortalService {
 	public List<Topics_Content>getTopicContent(){
 		List<Topics_Content>lsttc = new ArrayList<Topics_Content>();
 		for(Topics_Content tc : topiccontentrepo.findAll()) {
+			if(tc.getFlag_tc() == 0) {
 			Topics t = new Topics(tc.getTopics().getTopic_id(), tc.getTopics().getTopic_name(), 0, null);
 			Topics_Content tcon = new Topics_Content(tc.getContent_id(), tc.getContent_name(), tc.getContent_tutorial(), 0, t,null);
 			lsttc.add(tcon);
+			}
 		}
 		return lsttc;
 	}
@@ -74,7 +93,7 @@ public class ExamPortalService {
 		List<Topics_Content>lsttc = new ArrayList<Topics_Content>();
 		for(Topics_Content tc : topiccontentrepo.findAll()) {
 			Topics t = new Topics(tc.getTopics().getTopic_id(), tc.getTopics().getTopic_name(), 0, null);
-			if(t.getTopic_id()==topic_id) {
+			if(t.getTopic_id()==topic_id && tc.getFlag_tc()==0) {
 				Topics_Content tcon = new Topics_Content(tc.getContent_id(), tc.getContent_name(), tc.getContent_tutorial(), 0, t,null);
 				lsttc.add(tcon);
 			}
@@ -82,6 +101,27 @@ public class ExamPortalService {
 		return lsttc;
 	}
 	
+	public Topics_Content updateTopicContent(Topics_Content tc) {
+		Topics_Content tcon=topiccontentrepo.save(tc);
+		return tcon;
+	}
+	
+	public Topics_Content DeleteTopicContent(int id) {
+		Topics_Content t= topiccontentrepo.findById(id).get();
+		Topics top = new Topics(t.getTopics().getTopic_id(), t.getTopics().getTopic_name(), 0, null);
+		Topics_Content tp = new Topics_Content(t.getContent_id(), t.getContent_name(), t.getContent_tutorial()
+				, 1, top, null);
+		return topiccontentrepo.save(tp);
+	}
+	
+
+
+	
+//	public Topics_Content DeleteTopicContent(int id) {
+//		Topics_Content t=getTopicContentbyid(id);
+//		topiccontentrepo.delete(t);
+//		return t;
+//	}
 	
 
 	//=====CONTENT QUESTION====================================================================
@@ -90,7 +130,7 @@ public class ExamPortalService {
 		for(ContentQuestion cq : contentquerepo.findAll()) {
 			Topics t = new Topics(cq.getContent().getTopics().getTopic_id(), cq.getContent().getTopics().getTopic_name(), 0, null);
 			Topics_Content tc = new  Topics_Content(cq.getContent().getContent_id(), cq.getContent().getContent_name(), cq.getContent().getContent_tutorial(), 0, t, null);
-			ContentQuestion cque = new ContentQuestion(cq.getQuestion_id(), cq.getQuestion(), cq.getOption1(), cq.getOption2(), cq.getOption3(), cq.getOption4(), cq.getCorrectoptionnumber(), tc, 0);
+			ContentQuestion cque = new ContentQuestion(cq.getQuestion_id(), cq.getQuestion(), cq.getOption1(), cq.getOption2(), cq.getOption3(), cq.getOption4(), cq.getCorrectoptionnumber(), tc, null, 0);
 			lstcon.add(cque);
 		}
 		return lstcon;
@@ -104,24 +144,50 @@ public class ExamPortalService {
 		ContentQuestion cq = contentquerepo.findById(id).get();
 		Topics t = new Topics(cq.getContent().getTopics().getTopic_id(), cq.getContent().getTopics().getTopic_name(), 0, null);
 		Topics_Content tc = new  Topics_Content(cq.getContent().getContent_id(), cq.getContent().getContent_name(), cq.getContent().getContent_tutorial(), 0, t, null);
-		ContentQuestion cque = new ContentQuestion(cq.getQuestion_id(), cq.getQuestion(), cq.getOption1(), cq.getOption2(), cq.getOption3(), cq.getOption4(), cq.getCorrectoptionnumber(), tc, 0);
+		ContentQuestion cque = new ContentQuestion(cq.getQuestion_id(), cq.getQuestion(), cq.getOption1(), cq.getOption2(), cq.getOption3(), cq.getOption4(), cq.getCorrectoptionnumber(), tc, null, 0);
 		return cque;
 	}
+	
+	
+	public ContentQuestion UpdateContentQuestion(ContentQuestion cq) {
+		ContentQuestion cnq=contentquerepo.save(cq);
+		return cnq;
+	}
+	
+	public ContentQuestion DeleteContentQuestion(int id) {
+		ContentQuestion cq= contentquerepo.findById(id).get();
+		Topics t = new Topics(cq.getContent().getTopics().getTopic_id(), cq.getContent().getTopics().getTopic_name(), 0, null);
+		Topics_Content tc = new  Topics_Content(cq.getContent().getContent_id(), cq.getContent().getContent_name(), cq.getContent().getContent_tutorial(), 0, t, null);
+		ContentQuestion cque = new ContentQuestion(cq.getQuestion_id(), cq.getQuestion(), cq.getOption1(), cq.getOption2(), cq.getOption3(), cq.getOption4(), cq.getCorrectoptionnumber(), tc, null, 1);
+		return contentquerepo.save(cque);
+	}
+	
+
 	//==============STUDENT DETAILS====================================================================
 	
 	
 	public List<StudentDetails>GetStudents(){
 		List<StudentDetails>lst = new ArrayList<StudentDetails>();
 		for(StudentDetails s:studdetailrepo.findAll()) {
-			StudentDetails sd = new StudentDetails(s.getStudent_id(), s.getPassword(), s.getStudent_name(), s.getStudent_code(),s.getEmail_address(), s.getMobile_no(), s.getProfile_photo(), s.getCity(), 0, null);
+			StudentDetails sd = new StudentDetails(s.getStudent_id(), s.getPassword(), s.getStudent_name(), s.getStudent_code(), s.getEmail_address(), s.getMobile_no(), s.getProfile_photo(), s.getCity(), 0, null,null);
 			lst.add(sd);
 		}
 		return lst;
 	}
 	
+	public StudentDetails getStudentLogin(StudentDetails d){
+		StudentDetails sd = null;
+		for(StudentDetails s:studdetailrepo.findAll()) {
+			if(s.getStudent_code().equals(d.getStudent_code()) && s.getPassword().equals(d.getPassword())) {
+				sd = new StudentDetails(s.getStudent_id(), s.getPassword(), s.getStudent_name(), s.getStudent_code(), s.getEmail_address(), s.getMobile_no(), s.getProfile_photo(), s.getCity(), 0, null,null);
+			}
+		}
+		return sd;
+	}
+	
 	public StudentDetails GetStudentsById(int id){
 		StudentDetails s= studdetailrepo.findById(id).get();
-		StudentDetails sd = new StudentDetails(s.getStudent_id(), s.getPassword(), s.getStudent_name(), s.getStudent_code(),s.getEmail_address(), s.getCity(), s.getMobile_no(), s.getProfile_photo(), 0, null);
+		StudentDetails sd = new StudentDetails(s.getStudent_id(), s.getPassword(), s.getStudent_name(), s.getStudent_code(), s.getEmail_address(), s.getMobile_no(), s.getProfile_photo(), s.getCity(), 0, null,null);
 		return sd;
 	}
 	public String GeneratePassword(int size) {
@@ -163,14 +229,9 @@ public class ExamPortalService {
 		return code;
 	}
 
-//	public StudentDetails AddNewStudentDetails(StudentDetails s) {
-//		StudentDetails sd=new StudentDetails(s.getStudent_id(), GeneratePassword(8), s.getStudent_name(), NextStudentCode(), s.getEmail_address(), s.getMobile_no(), s.getProfile_photo(), s.getCity(), s.getFlag_sd(), null);
-//		return studdetailrepo.save(sd);
-//	}
-//	
 	public StudentDetails AddNewStudentDetails(StudentDetails s) {
 		String password = GeneratePassword(8);
-		StudentDetails sd=new StudentDetails(s.getStudent_id(), password, s.getStudent_name(), NextStudentCode(), s.getEmail_address(), s.getMobile_no(), s.getProfile_photo(), s.getCity(), s.getFlag_sd(), null);
+		StudentDetails sd=new StudentDetails(s.getStudent_id(), password, s.getStudent_name(), NextStudentCode(), s.getEmail_address(), s.getMobile_no(), s.getProfile_photo(), s.getCity(), 0, null,null);
 		StudentDetails studd = studdetailrepo.save(sd);
 		String subject ="Student Registartion Conformation";
 		String message="Dear "+sd.getStudent_name()+", Your account has been created successfully. You can access your account using following credentials \n Student Code="+sd.getStudent_code()+"\n Password="+password+"  \n ..... Thanks.";
@@ -178,7 +239,7 @@ public class ExamPortalService {
 		emailrepo.SendEmail(em);
 		return studd;
 	}
-	//===================Student Qualifiaction========================
+	//===================Student Qualification========================
 	
 	public List<StudentQualification>GetQualification(){
 		List<StudentQualification>lst = new ArrayList<StudentQualification>();
@@ -200,5 +261,5 @@ public class ExamPortalService {
 		return squal;
 	}
 	
-	
+	//
 }

@@ -40,84 +40,121 @@ public class StudentDetails {
 	@JsonIgnoreProperties("studentdetials")
 	private Set<StudentQualification>studqual;
 	
-	public int getStudent_id() {
-		return student_id;
-	}
-	public void setStudent_id(int student_id) {
-		this.student_id = student_id;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getStudent_name() {
-		return student_name;
-	}
-	public void setStudent_name(String student_name) {
-		this.student_name = student_name;
-	}
-	public String getStudent_code() {
-		return student_code;
-	}
-	public void setStudent_code(String student_code) {
-		this.student_code = student_code;
-	}
-	public String getEmail_address() {
-		return email_address;
-	}
-	public void setEmail_address(String email_address) {
-		this.email_address = email_address;
-	}
-	public String getMobile_no() {
-		return mobile_no;
-	}
-	public void setMobile_no(String mobile_no) {
-		this.mobile_no = mobile_no;
-	}
-	public String getProfile_photo() {
-		return profile_photo;
-	}
-	public void setProfile_photo(String profile_photo) {
-		this.profile_photo = profile_photo;
-	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
-	public int getFlag_sd() {
-		return flag_sd;
-	}
-	public void setFlag_sd(int flag_sd) {
-		this.flag_sd = flag_sd;
-	}
-	public Set<StudentQualification> getStudqual() {
-		return studqual;
-	}
-	public void setStudqual(Set<StudentQualification> studqual) {
-		this.studqual = studqual;
-	}
-	public StudentDetails(int student_id, String password, String student_name, String student_code,
-			String email_address, String mobile_no, String profile_photo, String city, int flag_sd,
-			Set<StudentQualification> studqual) {
-		super();
-		this.student_id = student_id;
-		this.password = password;
-		this.student_name = student_name;
-		this.student_code = student_code;
-		this.email_address = email_address;
-		this.mobile_no = mobile_no;
-		this.profile_photo = profile_photo;
-		this.city = city;
-		this.flag_sd = flag_sd;
-		this.studqual = studqual;
-	}
+	@OneToMany(mappedBy = "stud_details",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("stud_details")
+	private Set<ExamDetials>exam_detials;
+
 	public StudentDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public StudentDetails(int student_id, String password, String student_name, String student_code,
+			String email_address, String mobile_no, String profile_photo, String city, int flag_sd,
+			Set<StudentQualification> studqual, Set<ExamDetials> exam_detials) {
+		super();
+		this.student_id = student_id;
+		this.password = password;
+		this.student_name = student_name;
+		this.student_code = student_code;
+		this.email_address = email_address;
+		this.mobile_no = mobile_no;
+		this.profile_photo = profile_photo;
+		this.city = city;
+		this.flag_sd = flag_sd;
+		this.studqual = studqual;
+		this.exam_detials = exam_detials;
+	}
+
+	public int getStudent_id() {
+		return student_id;
+	}
+
+	public void setStudent_id(int student_id) {
+		this.student_id = student_id;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getStudent_name() {
+		return student_name;
+	}
+
+	public void setStudent_name(String student_name) {
+		this.student_name = student_name;
+	}
+
+	public String getStudent_code() {
+		return student_code;
+	}
+
+	public void setStudent_code(String student_code) {
+		this.student_code = student_code;
+	}
+
+	public String getEmail_address() {
+		return email_address;
+	}
+
+	public void setEmail_address(String email_address) {
+		this.email_address = email_address;
+	}
+
+	public String getMobile_no() {
+		return mobile_no;
+	}
+
+	public void setMobile_no(String mobile_no) {
+		this.mobile_no = mobile_no;
+	}
+
+	public String getProfile_photo() {
+		return profile_photo;
+	}
+
+	public void setProfile_photo(String profile_photo) {
+		this.profile_photo = profile_photo;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public int getFlag_sd() {
+		return flag_sd;
+	}
+
+	public void setFlag_sd(int flag_sd) {
+		this.flag_sd = flag_sd;
+	}
+
+	public Set<StudentQualification> getStudqual() {
+		return studqual;
+	}
+
+	public void setStudqual(Set<StudentQualification> studqual) {
+		this.studqual = studqual;
+	}
+
+	public Set<ExamDetials> getExam_detials() {
+		return exam_detials;
+	}
+
+	public void setExam_detials(Set<ExamDetials> exam_detials) {
+		this.exam_detials = exam_detials;
+	}
+	
+	
+	
 }	
 	
