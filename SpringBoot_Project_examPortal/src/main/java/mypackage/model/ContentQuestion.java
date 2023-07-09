@@ -39,6 +39,10 @@ public class ContentQuestion {
 	@JsonIgnoreProperties("content_question")
 	private Set<ExamQuestion>exam_question;
 	
+	@ManyToOne(fetch = FetchType.LAZY,optional = false)
+	@JoinColumn(name = "topic_id")
+	private Topics topics;
+	
 	@Column(columnDefinition = "int default 0")
 	private int flag_cq;
 
@@ -49,7 +53,7 @@ public class ContentQuestion {
 
 	public ContentQuestion(int question_id, String question, String option1, String option2, String option3,
 			String option4, int correctoptionnumber, Topics_Content content, Set<ExamQuestion> exam_question,
-			int flag_cq) {
+			Topics topics, int flag_cq) {
 		super();
 		this.question_id = question_id;
 		this.question = question;
@@ -60,6 +64,7 @@ public class ContentQuestion {
 		this.correctoptionnumber = correctoptionnumber;
 		this.content = content;
 		this.exam_question = exam_question;
+		this.topics = topics;
 		this.flag_cq = flag_cq;
 	}
 
@@ -135,6 +140,14 @@ public class ContentQuestion {
 		this.exam_question = exam_question;
 	}
 
+	public Topics getTopics() {
+		return topics;
+	}
+
+	public void setTopics(Topics topics) {
+		this.topics = topics;
+	}
+
 	public int getFlag_cq() {
 		return flag_cq;
 	}
@@ -142,7 +155,7 @@ public class ContentQuestion {
 	public void setFlag_cq(int flag_cq) {
 		this.flag_cq = flag_cq;
 	}
-	
+
 	
 		
 }

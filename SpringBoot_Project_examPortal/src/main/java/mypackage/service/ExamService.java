@@ -10,6 +10,7 @@ import mypackage.model.ContentQuestion;
 import mypackage.model.ExamDetials;
 import mypackage.model.ExamQuestion;
 import mypackage.model.StudentDetails;
+import mypackage.model.Topics;
 import mypackage.repository.ContentQuestionRepository;
 import mypackage.repository.ExamQuestionRepositroy;
 import mypackage.repository.ExamRepository;
@@ -81,8 +82,10 @@ public class ExamService {
 		List<ExamQuestion>lst=new ArrayList<ExamQuestion>();
 		for(ExamQuestion q:eqrepo.findAll()) {
 			if(q.getExam_detials().getExam_id()==eid) {
+				ContentQuestion conq  = new ContentQuestion();
+				Topics t = new Topics(conq.getTopics().getTopic_id(),conq.getTopics().getTopic_name() ,conq.getTopics().getFlag_top(),null,null);
 				ExamDetials ed = new ExamDetials(q.getExam_detials().getExam_id(),q.getExam_detials().getExam_date(),q.getExam_detials().getStart_time(),q.getExam_detials().getEnd_time(),null,null,q.getExam_detials().getFlag_exam());
-				ContentQuestion cq = new ContentQuestion(q.getContent_question().getQuestion_id(),q.getContent_question().getQuestion(),q.getContent_question().getOption1(),q.getContent_question().getOption2(),q.getContent_question().getOption3(),q.getContent_question().getOption4(),q.getContent_question().getCorrectoptionnumber(),null,null,q.getContent_question().getFlag_cq());
+				ContentQuestion cq = new ContentQuestion(q.getContent_question().getQuestion_id(),q.getContent_question().getQuestion(),q.getContent_question().getOption1(),q.getContent_question().getOption2(),q.getContent_question().getOption3(),q.getContent_question().getOption4(),q.getContent_question().getCorrectoptionnumber(),null,null,t,q.getContent_question().getFlag_cq());
 				ExamQuestion eq = new ExamQuestion(q.getExam_question_id(),q.getSumbited_question_no(),cq,ed,q.getFlag_eq());
 				lst.add(eq);
 			}

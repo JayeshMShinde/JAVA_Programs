@@ -94,6 +94,11 @@ public class TopicController {
 			 return "Updated Successfully";
 		}
 		
+		@GetMapping("api/topicwiseQuestion/{id}")
+		public List<ContentQuestion>getTopicWiseQuestion(@PathVariable("id")int id) {
+			return epservice.TopicWiseContentQuestion(id);
+		}
+		
 		@DeleteMapping("api/contentquestion/{id}")
 		public String DeleteContentQuestion(@PathVariable("id")int id) {
 			epservice.DeleteContentQuestion(id);

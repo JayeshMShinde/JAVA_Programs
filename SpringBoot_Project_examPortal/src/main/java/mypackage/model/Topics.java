@@ -31,6 +31,25 @@ public class Topics {
 	@OneToMany(mappedBy = "topics",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("topics")
 	private Set<Topics_Content>topicscontent;
+	
+	@OneToMany(mappedBy = "topics",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("topics")
+	private Set<ContentQuestion>content_ques;
+
+	public Topics() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Topics(int topic_id, String topic_name, int flag_top, Set<Topics_Content> topicscontent,
+			Set<ContentQuestion> content_ques) {
+		super();
+		this.topic_id = topic_id;
+		this.topic_name = topic_name;
+		this.flag_top = flag_top;
+		this.topicscontent = topicscontent;
+		this.content_ques = content_ques;
+	}
 
 	public int getTopic_id() {
 		return topic_id;
@@ -64,18 +83,13 @@ public class Topics {
 		this.topicscontent = topicscontent;
 	}
 
-	public Topics(int topic_id, String topic_name, int flag_top, Set<Topics_Content> topicscontent) {
-		super();
-		this.topic_id = topic_id;
-		this.topic_name = topic_name;
-		this.flag_top = flag_top;
-		this.topicscontent = topicscontent;
+	public Set<ContentQuestion> getContent_ques() {
+		return content_ques;
 	}
 
-	public Topics() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setContent_ques(Set<ContentQuestion> content_ques) {
+		this.content_ques = content_ques;
 	}
 
-	
+		
 }

@@ -29,7 +29,7 @@ public class ExamPortalService {
 		List<Topics>lsttopic = new ArrayList<Topics>();
 		for(Topics t : topicrepo.findAll()) {
 			if(t.getFlag_top() == 0) {
-				Topics tp = new Topics(t.getTopic_id(), t.getTopic_name(), 0,null);
+				Topics tp = new Topics(t.getTopic_id(), t.getTopic_name(), 0,null,null);
 				lsttopic.add(tp);
 			}
 		}
@@ -42,7 +42,7 @@ public class ExamPortalService {
 	
 	public Topics GetTopicsbyId(int id) {
 		Topics t = topicrepo.findById(id).get();
-		Topics tp = new Topics(t.getTopic_id(), t.getTopic_name(), 0, null);
+		Topics tp = new Topics(t.getTopic_id(), t.getTopic_name(), 0, null,null);
 		return tp;
 	}
 	
@@ -59,7 +59,7 @@ public class ExamPortalService {
 	
 	public Topics DeleteTopic(int id) {
 		Topics t=topicrepo.findById(id).get();
-		Topics tp = new Topics(t.getTopic_id(), t.getTopic_name(),1, null);
+		Topics tp = new Topics(t.getTopic_id(), t.getTopic_name(),1, null,null);
 		return topicrepo.save(tp);
 	}
 	
@@ -70,7 +70,7 @@ public class ExamPortalService {
 		List<Topics_Content>lsttc = new ArrayList<Topics_Content>();
 		for(Topics_Content tc : topiccontentrepo.findAll()) {
 			if(tc.getFlag_tc() == 0) {
-			Topics t = new Topics(tc.getTopics().getTopic_id(), tc.getTopics().getTopic_name(), 0, null);
+			Topics t = new Topics(tc.getTopics().getTopic_id(), tc.getTopics().getTopic_name(), 0, null,null);
 			Topics_Content tcon = new Topics_Content(tc.getContent_id(), tc.getContent_name(), tc.getContent_tutorial(), 0, t,null);
 			lsttc.add(tcon);
 			}
@@ -84,7 +84,7 @@ public class ExamPortalService {
 	
 	public Topics_Content getTopicContentbyid(int id){
 		Topics_Content tc = topiccontentrepo.findById(id).get();
-			Topics t = new Topics(tc.getTopics().getTopic_id(), tc.getTopics().getTopic_name(), 0, null);
+			Topics t = new Topics(tc.getTopics().getTopic_id(), tc.getTopics().getTopic_name(), 0, null,null);
 			Topics_Content tcon = new Topics_Content(tc.getContent_id(), tc.getContent_name(), tc.getContent_tutorial(), 0, t, null);
 		return tcon;
 	}
@@ -92,7 +92,7 @@ public class ExamPortalService {
 	public List<Topics_Content>getTopicwiseContent(int topic_id) {
 		List<Topics_Content>lsttc = new ArrayList<Topics_Content>();
 		for(Topics_Content tc : topiccontentrepo.findAll()) {
-			Topics t = new Topics(tc.getTopics().getTopic_id(), tc.getTopics().getTopic_name(), 0, null);
+			Topics t = new Topics(tc.getTopics().getTopic_id(), tc.getTopics().getTopic_name(), 0, null,null);
 			if(t.getTopic_id()==topic_id && tc.getFlag_tc()==0) {
 				Topics_Content tcon = new Topics_Content(tc.getContent_id(), tc.getContent_name(), tc.getContent_tutorial(), 0, t,null);
 				lsttc.add(tcon);
@@ -108,7 +108,7 @@ public class ExamPortalService {
 	
 	public Topics_Content DeleteTopicContent(int id) {
 		Topics_Content t= topiccontentrepo.findById(id).get();
-		Topics top = new Topics(t.getTopics().getTopic_id(), t.getTopics().getTopic_name(), 0, null);
+		Topics top = new Topics(t.getTopics().getTopic_id(), t.getTopics().getTopic_name(), 0, null,null);
 		Topics_Content tp = new Topics_Content(t.getContent_id(), t.getContent_name(), t.getContent_tutorial()
 				, 1, top, null);
 		return topiccontentrepo.save(tp);
@@ -128,10 +128,12 @@ public class ExamPortalService {
 	public List<ContentQuestion>GetContentQuestion(){
 		List<ContentQuestion>lstcon = new ArrayList<ContentQuestion>();
 		for(ContentQuestion cq : contentquerepo.findAll()) {
-			Topics t = new Topics(cq.getContent().getTopics().getTopic_id(), cq.getContent().getTopics().getTopic_name(), 0, null);
+			if(cq.getFlag_cq()==0) {
+			Topics t = new Topics(cq.getContent().getTopics().getTopic_id(), cq.getContent().getTopics().getTopic_name(), 0, null,null);
 			Topics_Content tc = new  Topics_Content(cq.getContent().getContent_id(), cq.getContent().getContent_name(), cq.getContent().getContent_tutorial(), 0, t, null);
-			ContentQuestion cque = new ContentQuestion(cq.getQuestion_id(), cq.getQuestion(), cq.getOption1(), cq.getOption2(), cq.getOption3(), cq.getOption4(), cq.getCorrectoptionnumber(), tc, null, 0);
-			lstcon.add(cque);
+			ContentQuestion conq = new ContentQuestion(cq.getQuestion_id(), cq.getQuestion(), cq.getOption1(), cq.getOption2(),cq.getOption3(),cq.getOption4(),cq.getCorrectoptionnumber(), tc, null, t, 0);
+			lstcon.add(conq);
+			}
 		}
 		return lstcon;
 	}
@@ -142,10 +144,10 @@ public class ExamPortalService {
 	
 	public ContentQuestion getContentQuestionbyId(int id) {
 		ContentQuestion cq = contentquerepo.findById(id).get();
-		Topics t = new Topics(cq.getContent().getTopics().getTopic_id(), cq.getContent().getTopics().getTopic_name(), 0, null);
+		Topics t = new Topics(cq.getContent().getTopics().getTopic_id(), cq.getContent().getTopics().getTopic_name(), 0, null,null);
 		Topics_Content tc = new  Topics_Content(cq.getContent().getContent_id(), cq.getContent().getContent_name(), cq.getContent().getContent_tutorial(), 0, t, null);
-		ContentQuestion cque = new ContentQuestion(cq.getQuestion_id(), cq.getQuestion(), cq.getOption1(), cq.getOption2(), cq.getOption3(), cq.getOption4(), cq.getCorrectoptionnumber(), tc, null, 0);
-		return cque;
+		ContentQuestion conq = new ContentQuestion(cq.getQuestion_id(), cq.getQuestion(), cq.getOption1(), cq.getOption2(),cq.getOption3(),cq.getOption4(),cq.getCorrectoptionnumber(), tc, null, null, 0);
+		return conq;
 	}
 	
 	
@@ -156,15 +158,31 @@ public class ExamPortalService {
 	
 	public ContentQuestion DeleteContentQuestion(int id) {
 		ContentQuestion cq= contentquerepo.findById(id).get();
-		Topics t = new Topics(cq.getContent().getTopics().getTopic_id(), cq.getContent().getTopics().getTopic_name(), 0, null);
+		Topics t = new Topics(cq.getContent().getTopics().getTopic_id(), cq.getContent().getTopics().getTopic_name(), 0, null,null);
 		Topics_Content tc = new  Topics_Content(cq.getContent().getContent_id(), cq.getContent().getContent_name(), cq.getContent().getContent_tutorial(), 0, t, null);
-		ContentQuestion cque = new ContentQuestion(cq.getQuestion_id(), cq.getQuestion(), cq.getOption1(), cq.getOption2(), cq.getOption3(), cq.getOption4(), cq.getCorrectoptionnumber(), tc, null, 1);
-		return contentquerepo.save(cque);
+		ContentQuestion conq = new ContentQuestion(cq.getQuestion_id(), cq.getQuestion(), cq.getOption1(), cq.getOption2(),cq.getOption3(),cq.getOption4(),cq.getCorrectoptionnumber(), tc, null, null, 0);
+		return contentquerepo.save(conq);
 	}
 	
+	public List<ContentQuestion>TopicWiseContentQuestion(int topic_id){
+		List<ContentQuestion>lstcq = new ArrayList<ContentQuestion>();
+		for(ContentQuestion cq : contentquerepo.findAll()) {
+			Topics t = new Topics(cq.getTopics().getTopic_id(),cq.getTopics().getTopic_name(),cq.getTopics().getFlag_top(),null,null);
+			if(t.getTopic_id()==topic_id && cq.getFlag_cq()==0) {
+				ContentQuestion conq = new ContentQuestion(cq.getQuestion_id(),cq.getQuestion(),cq.getOption1(),cq.getOption2(), cq.getOption3(), cq.getOption4(), cq.getCorrectoptionnumber(), null, null, t, 0);
+				lstcq.add(conq);
+			}
+		}
+		return lstcq;
+	}
 
-	//==============STUDENT DETAILS====================================================================
+//	public ContentQuestion DeleteContentQues(int id) {
+//		ContentQuestion t=getContentQuestionbyId(id);
+//		contentquerepo.delete(t);
+//		return t;
+//	}
 	
+	//==============STUDENT DETAILS====================================================================
 	
 	public List<StudentDetails>GetStudents(){
 		List<StudentDetails>lst = new ArrayList<StudentDetails>();
