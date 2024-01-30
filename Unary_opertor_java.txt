@@ -1,0 +1,46 @@
+package Second_day;
+
+public class Operator {
+	
+	void unary_prefix() {
+		int a = 10 , b;
+		b = ++a;
+		System.out.println("a = "+a);
+		System.out.println("\n b = "+b);
+	
+	}
+	void unary_postfix() {
+		int x = 10 , y;
+		y = x++;
+		System.out.println("x = "+x);
+		System.out.println("\ny = "+y);
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Operator o1 = new Operator();
+		o1.unary_prefix();
+		o1.unary_postfix();
+	}
+
+}
+/*
+ *Unary (++ , --) 
+ * 
+ * ++ :- it denotes increment
+ * -- :- it denotes decrement
+ *  
+ *  unary has two type:
+ *  1.Prefix:
+ *  	if a = 10 
+ *  	b = ++a
+ *  then output will
+ *  	a = 11
+ *  	b = 11
+ *  2.Postfix:
+ *  	if a = 10 
+ *  		b = a++
+ *  	then output will
+ *  		a = 11
+ *  		b = 10
+ */

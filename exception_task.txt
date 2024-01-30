@@ -1,0 +1,60 @@
+package Exception_handling;
+
+import java.util.Scanner;
+
+//import java.util.Scanner;
+
+
+class UDException extends Exception{
+	public String message;
+	public UDException(String s) {
+		message = s;
+	}
+}
+public class Exception_ex {
+
+	void Excpt_1() {
+		int i,sum=0;
+		try {
+			for(i=0;i<150;i=i+10) {
+				sum = sum+i;
+				if(sum >100) {
+					throw  new UDException("Addtion  Exceeds 100");
+				}
+				else {
+					System.out.println(sum);
+				}
+			}
+			
+		}
+		catch (UDException e) {
+			System.out.println(e.message);
+		}
+		
+		
+	}
+	void excpt_2() {
+		int a;
+		System.out.println("Enter the value:");
+		Scanner sc = new Scanner(System.in);
+		a = sc.nextInt();
+		try  {
+			if(a>=18 && a<=21) {
+				System.out.println("You are eligble");
+			}
+			else{
+				throw new UDException("Not eligble");
+			}
+		}
+		catch(UDException e) {
+			System.out.println(e.message);
+		}
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Exception_ex ee1 = new Exception_ex();
+		ee1.Excpt_1();
+		ee1.excpt_2();
+	}
+
+}

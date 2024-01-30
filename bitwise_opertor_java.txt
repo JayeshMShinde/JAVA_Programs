@@ -1,0 +1,38 @@
+package Second_day;
+
+public class Bitwise_ex {
+
+	void lsb() {
+		int a = 5 ,b;
+		//Left_side bitwise opertor_
+		b = a<<2;
+		System.out.println("left shift : "+b);
+	}
+	void rsb() {
+		int a = 80 ,b;
+		//right_side bitwise opertor_
+		b = a>>3;
+		System.out.println("Right shift : "+b);
+	}
+	void bit_op() {
+		int a =5 ,b =6, c;
+		c = a & b;
+		System.out.println("Bitwise_and : "+c);
+		
+		c = a | b;
+		System.out.println("Bitwise_or : "+c);
+		
+		c = a ^ b;
+		System.out.println("Bitwise_Xor : "+c);
+		
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Bitwise_ex be1 = new Bitwise_ex();
+		be1.lsb();
+		be1.rsb();
+		be1.bit_op();
+		
+	}
+
+}

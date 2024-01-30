@@ -1,0 +1,130 @@
+package File_handling;
+import java.io.*;
+import java.util.Scanner;
+public class FileExample {
+
+	void file_handling_ex1() {
+		try {
+			File f = new File("D:\\myfile.txt");
+			FileWriter fw = new FileWriter(f,true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write("hi hello");
+			bw.newLine();
+			bw.write("Welcome");
+			bw.close();
+			fw.close();
+			System.out.println("Finshed");
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	void file_handling_ex2() {
+		try {
+			int sqr =0;
+			File f = new File("D:\\Square.txt");
+			FileWriter fw = new FileWriter(f,true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			for(int i=1;i<=100;i++) {
+				sqr = i*i;
+				bw.write("Square of "+i+" : "+sqr);
+				bw.newLine();
+			}
+			bw.close();
+			fw.close();
+			System.out.println("Finshed");
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	void file_handling_ex3() {
+		try {
+			int d;
+			File f = new File("D:\\myfile.txt");
+			FileReader fr = new FileReader(f);
+			while((d=fr.read())!=-1) {
+				char ch = (char)d;
+				System.out.print(ch);
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	void file_handling_ex4() {
+		try {
+			String str="";
+			File f1 = new File("D:\\myfile.txt");
+			FileReader fr1 = new FileReader(f1);
+			BufferedReader br=new BufferedReader(fr1);
+			while((str=br.readLine())!=null){
+				System.out.print(str);
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	void file_handling_ex5() {
+		try {
+			int d,cnt;
+			char ch;
+			cnt =0;
+			File file1 = new File("D:\\Square.txt");
+			FileReader fr4 = new FileReader(file1);
+			while((d=fr4.read())!=-1) {
+				ch = (char)d;
+				if(ch =='a') {
+					cnt++;
+				}
+			}
+			
+			
+			System.out.println("Number 1 is repeted "+cnt+" Times");
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	void file_handling_ex6() {
+		try {
+			int rlno, n=1;
+			float per;
+			char ch;
+			String name,qualif;
+			File f = new File("D:\\studdata1.txt");
+			FileWriter fw = new FileWriter(f,true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			do {
+				Scanner sc = new Scanner(System.in);
+				System.out.println("Enter the roll no:");
+				rlno = sc.nextInt();
+				System.out.println("Enter the Name:");
+				name = sc.next();
+				System.out.println("Enter the Qualification:");
+				qualif = sc.next();
+				System.out.println("Enter the percentage:");
+				per = sc.nextFloat();
+				bw.write("Roll no:"+rlno+";Name:"+name+";qualfication:"+qualif+";percentage:"+per);
+				bw.newLine();
+				System.out.println("Data enterted");
+				System.out.println("Do you want to continue:(Y/N)");
+				ch = sc.next().charAt(0);
+			}while(ch == 'Y' || ch == 'y');
+			bw.close();
+			fw.close();
+			
+			
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		FileExample fe = new FileExample();
+		fe.file_handling_ex6();
+	}
+
+}

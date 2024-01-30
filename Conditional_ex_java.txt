@@ -1,0 +1,38 @@
+package Second_day;
+import java.util.Scanner;
+public class Conditional_ex {
+
+	void product_detail() {
+		int qty;
+		String product_nm;
+		Scanner sc  = new Scanner(System.in);
+		System.out.println("Enter the product name: ");
+		product_nm = sc.next();
+		System.out.println("Enter the Quantity: ");
+		qty = sc.nextInt();
+		
+		if (qty ==0) {
+			System.out.println("Product name : "+product_nm+"\nQuantity : "+qty);
+			System.out.println("Out of Stock");
+		}
+		else if(qty>=10) {
+			System.out.println("Product name : "+product_nm+"\nQuantity : "+qty);
+			System.out.println("Avaliable");
+		}
+		else if(qty>0 && qty<10) {
+			System.out.println("Product name : "+product_nm+"\nQuantity : "+qty);
+			System.out.println("Limited stock");
+		}
+		else {			
+			System.out.println("Product name : "+product_nm+"\nQuantity : "+qty);
+			System.out.println("Invalid Source");
+		}
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Conditional_ex ce1 = new Conditional_ex();
+		ce1.product_detail();
+ 	}
+
+}

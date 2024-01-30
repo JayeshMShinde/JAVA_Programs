@@ -1,0 +1,85 @@
+package Second_day;
+
+import java.util.Scanner;
+
+public class Task_loop {
+
+	void reverse_no() {
+		int n,sum=0,rem;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the Number : ");
+		n = sc.nextInt();
+		while(n!=0) {
+			rem = n%10;
+			sum = rem+sum*10;
+			n=n/10;
+		}
+		System.out.print("Reverse Number:"+sum);
+	}
+	void Palindrome() {
+		int num,sum=0,rem,temp = 0;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the Number : ");
+		num = sc.nextInt();
+		temp = num;
+		while(temp!=0) {
+			rem = temp%10;
+			sum = rem+(sum*10);
+			temp=temp/10;
+		}
+		if(num == sum) {
+			System.out.print("It is Palindrome Number :"+sum);
+		}
+		else {
+			System.out.println("Not A Palindrome : "+ sum);
+		}
+	}
+	void Armstrong() {
+		int num,sum=0,rem,temp = 0,ast=0;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the Number : ");
+		num = sc.nextInt();
+		temp = num;
+		while(temp!=0) {
+			rem = temp%10;
+			ast += (rem*rem*rem);
+			temp = temp/10;
+		}
+		if(num == ast)
+		{
+			System.out.println("it is Armstrong :"+ast);
+		}
+		else {
+			System.out.println("it is not Armstrong :"+ast);
+		}
+	}
+	void dec_to_bin() {
+		int num,rem,temp = 0;
+		String sum;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the Number : ");
+		num = sc.nextInt();
+		temp = num;
+		sum = "";
+		while(temp!=0) {
+			rem = temp%2;
+			sum = rem+sum;
+			temp = temp/2;
+		}
+		System.out.println("Binary of "+num+" is :"+sum);
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Task_loop tl1 =new Task_loop();
+		System.out.println("\n-------------Reverse Number-----------------\n");
+		tl1.reverse_no();
+		System.out.println("\n-------------Palindrome--------\n");
+		tl1.Palindrome();
+		System.out.println("\n-------------Armstrong--------\n");
+		tl1.Armstrong();
+		System.out.println("\n-------------decimal_to_binary--------\n");
+		tl1.dec_to_bin();
+	}
+
+}

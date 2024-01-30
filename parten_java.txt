@@ -1,0 +1,113 @@
+package Second_day;
+public class Nested_forloop {
+	
+	void nestedloop_ex1() {
+		int i ,j;
+		for (i=1;i<=5;i++) {
+			for(j=1;j<=i;j++) {
+				System.out.print(j);
+			}
+			System.out.println();
+		}
+	}
+	void nestedloop_ex2() {
+		int i ,j;
+		for (i=5;i>=1;i--) {
+			for(j=1;j<=i;j++) {
+				System.out.print(j);
+			}
+			System.out.println();
+		}
+	}
+	void nestedloop_ex3() {
+		int i ,j,k=1;
+		for (i=5;i>=1;i--) {
+			for(j=1;j<=i;j++) {
+				System.out.print(k);
+			}
+			k++;
+			System.out.println();
+		}
+	}
+	void nestedloop_ex4() {
+		int i ,j,k=1;
+		for (i=1;i<=5;i++) {
+			for(j=1;j<=i;j++) {
+				System.out.print(k);
+			}
+			k++;
+			System.out.println();
+		}
+	}
+	void nestedloop_ex5() {
+		int i ,j,k=1;
+		for (i=1;i<=5;i++) {
+			for(j=5;j>=i;j--) {
+				System.out.print(j);
+			}
+			System.out.println();
+		}
+	}
+	void nestedloop_ex6() {
+		int i ,j,k;
+		for (i=1;i<=5;i++) {
+			for(j=5;j>=i;j--) {
+				System.out.print(" ");
+			}
+			for(k=1;k<=i;k++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+	}
+	void nestedloop_ex7() {
+		int i ,j,k;
+		for (i=1;i<=5;i++) {
+			for(j=5;j>=i;j--) {
+				System.out.print(" ");
+			}
+			for(k=i;k>=1;k--) {
+				System.out.print(k);
+				
+			}
+			for(int l=2;l<=i;l++) {
+				System.out.print(l);
+			}
+			System.out.println();
+		}
+	}
+	void nestedloop_ex8() {
+		int i ,j,k ;
+		for(i=0;i<=5;i++) {
+			for(j=5;j>i;j--) {
+				System.out.print(" ");
+			}
+			for(k=i;k>=1;k--) {
+				System.out.print(k);
+			}
+			System.out.println();
+		}
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Nested_forloop nfl1 = new Nested_forloop();
+		System.out.println("--------------------------------");
+		nfl1.nestedloop_ex1();
+		System.out.println("--------------------------------");
+		nfl1.nestedloop_ex2();
+		System.out.println("--------------------------------");
+		nfl1.nestedloop_ex3();
+		System.out.println("--------------------------------");
+		nfl1.nestedloop_ex4();
+		System.out.println("--------------------------------");
+		nfl1.nestedloop_ex5();
+		System.out.println("--------------------------------");
+		nfl1.nestedloop_ex6();
+		System.out.println("--------------------------------");
+		nfl1.nestedloop_ex7();
+		System.out.println("--------------------------------");
+		nfl1.nestedloop_ex8();
+		System.out.println("--------------------------------");
+		
+	}
+}

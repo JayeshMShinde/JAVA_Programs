@@ -1,0 +1,41 @@
+package Second_day;
+
+public class Loop {
+
+	void for_loop() {
+
+		System.out.println("for Loop");
+		int i;
+		for (i=1;i<=10;i++) {
+			System.out.println(i);
+		}
+	}
+	void While_loop() {
+
+		System.out.println("While Loop");
+		int i = 1;
+		while(i<=10) {
+			System.out.println(i);
+			i++;
+		}
+	}
+	void do_while_loop() {
+
+		System.out.println("Do_While Loop");
+		int i = 1;
+		do {
+			System.out.println(i);
+			i++;
+		}while(i<=10);
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Loop l1 = new Loop();
+		l1.for_loop();
+		l1.While_loop();
+		l1.do_while_loop();
+		
+	}
+
+}
